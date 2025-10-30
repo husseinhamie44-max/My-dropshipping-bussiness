@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ShopVerse — The World's Marketplace</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="ShopVerse — Buy anything, shipped worldwide. Prototype marketplace layout." />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <svg viewBox="0 0 24 24" class="brand-logo" aria-hidden><path d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/></svg>
+        <span>ShopVerse</span>
+      </a>
+
+      <div class="search-wrap">
+        <input id="search" class="search-input" type="search" placeholder="Search millions of products..." />
+        <button id="searchBtn" class="btn search-btn">Search</button>
+      </div>
+
+      <nav class="header-links">
+        <button id="wishlistBtn" class="icon-btn">♡ <span id="wishCount" class="badge">0</span></button>
+        <button id="cartBtn" class="icon-btn">🛒 <span id="cartCount" class="badge">0</span></button>
+      </nav>
+    </div>
+
+    <div class="container nav-row">
+      <div class="categories">
+        <a class="nav-link active">All</a>
+        <a class="nav-link">Electronics</a>
+        <a class="nav-link">Fashion</a>
+        <a class="nav-link">Home</a>
+        <a class="nav-link">Gaming</a>
+        <a class="nav-link">Beauty</a>
+        <a class="nav-link">Sports</a>
+      </div>
+
+      <div class="mini-actions">
+        <select id="sortSelect" class="select">
+          <option value="relevance">Sort: Relevance</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1>Everything — delivered worldwide</h1>
+          <p>Shop millions of items from trusted suppliers. Fast shipping options, guaranteed buyer protection, and the best deals curated daily.</p>
+          <div class="hero-cta">
+            <a href="#products" class="btn btn-lg">Shop Products</a>
+            <a href="#how" class="btn btn-ghost">How it works</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-card">
+            <div class="hero-card-top">Featured deal</div>
+            <img src="https://picsum.photos/seed/hero/420/260" alt="Featured" />
+            <div class="hero-card-body">
+              <div class="title">Wireless Headphones — Pro</div>
+              <div class="price">$79.99 <span class="muted">from $39.00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container features">
+      <div class="feature">
+        <h3>Global suppliers</h3>
+        <p>We connect to warehouses and sellers worldwide so you get the best price.</p>
+      </div>
+      <div class="feature">
+        <h3>Buyer protection</h3>
+        <p>Secure payments, returns, and tracking built into every order.</p>
+      </div>
+      <div class="feature">
+        <h3>Curated deals</h3>
+        <p>Daily deals selected by our team and data models to save you time.</p>
+      </div>
+    </section>
+
+    <section id="products" class="container product-section">
+      <div class="section-head">
+        <h2>Explore products</h2>
+        <div class="section-controls">
+          <label class="small-label">Filter price</label>
+          <div class="price-filter">
+            <input id="minPrice" type="number" placeholder="Min" />
+            <input id="maxPrice" type="number" placeholder="Max" />
+            <button id="applyPrice" class="btn">Apply</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="productGrid" class="product-grid">
+        <!-- JavaScript inserts product cards here -->
+      </div>
+
+      <div class="load-more-wrap">
+        <button id="loadMore" class="btn">Load more products</button>
+      </div>
+    </section>
+
+    <section id="how" class="container how-it-works">
+      <h2>How ShopVerse works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h4>Find it</h4>
+          <p>Search or browse categories — we list thousands of items.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h4>Order</h4>
+          <p>We place the order with our supplier and take care of shipping & tracking.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h4>Receive & enjoy</h4>
+          <p>Fast delivery options and support if anything goes wrong.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Product Quickview Modal -->
+  <div id="modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button id="modalClose" class="modal-close">✕</button>
+      <div class="modal-content">
+        <img id="modalImg" src="" alt="product" />
+        <div class="modal-info">
+          <h3 id="modalTitle">Product title</h3>
+          <p id="modalDesc" class="muted">Product description</p>
+          <div class="modal-price" id="modalPrice">$0.00</div>
+          <div class="modal-suppliers" id="modalSuppliers"></div>
+          <div class="modal-actions">
+            <input id="modalQty" type="number" min="1" value="1" />
+            <button id="modalAdd" class="btn">Add to cart</button>
+            <button id="modalWish" class="btn btn-ghost">♡ Wishlist</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <aside id="cartDrawer" class="cart-drawer hidden">
+    <div class="cart-header">
+      <h3>Your cart</h3>
+      <button id="closeCart" class="modal-close">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total">Total: <span id="cartTotal">$0.00</span></div>
+      <button id="checkoutBtn" class="btn btn-primary">Checkout (mock)</button>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>ShopVerse</h4>
+        <p>Everything — delivered worldwide. Prototype marketplace layout.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a>About</a>
+        <a>Careers</a>
+        <a>Press</a>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <a>Help center</a>
+        <a>Returns</a>
+        <a>Contact</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a>Terms</a>
+        <a>Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> ShopVerse — Prototype. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
